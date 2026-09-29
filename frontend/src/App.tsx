@@ -36,7 +36,7 @@ function App() {
     if (!input.trim()) return;
 
     const userMessage = { id: Date.now(), role: 'user', text: input };
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev: any) => [...prev, userMessage]);
     setInput('');
     setIsTyping(true);
 
@@ -48,9 +48,9 @@ function App() {
         body: JSON.stringify({ message: userMessage.text })
       });
       const data = await res.json();
-      setMessages(prev => [...prev, { id: Date.now(), role: 'bot', text: data.reply }]);
+      setMessages((prev: any) => [...prev, { id: Date.now(), role: 'bot', text: data.reply }]);
     } catch (error) {
-      setMessages(prev => [...prev, { id: Date.now(), role: 'bot', text: 'Error connecting to backend.' }]);
+      setMessages((prev: any) => [...prev, { id: Date.now(), role: 'bot', text: 'Error connecting to backend.' }]);
     } finally {
       setIsTyping(false);
     }
@@ -61,7 +61,7 @@ function App() {
       const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
       const res = await fetch(`${apiUrl}/documents/${filename}`, { method: 'DELETE' });
       if (res.ok) {
-        setFiles(prev => prev.filter(f => f.name !== filename));
+        setFiles((prev: any) => prev.filter((f: any) => f.name !== filename));
       }
     } catch (error) {
       console.error('Delete failed', error);
@@ -83,7 +83,7 @@ function App() {
         body: formData,
       });
       if (res.ok) {
-        setFiles(prev => [...prev, { name: file.name, size: `${(file.size / 1024).toFixed(1)} KB` }]);
+        setFiles((prev: any) => [...prev, { name: file.name, size: `${(file.size / 1024).toFixed(1)} KB` }]);
       }
     } catch (error) {
       console.error('Upload failed', error);
@@ -125,7 +125,7 @@ function App() {
           
           <div className="flex-1 overflow-y-auto flex flex-col gap-3 pr-2 custom-scrollbar">
             <AnimatePresence>
-              {files.map((f, i) => (
+              {files.map((f: any, i: any) => (
                 <motion.div 
                   initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}
                   key={i} 
@@ -167,7 +167,7 @@ function App() {
           
           {/* Messages */}
           <div className="flex-1 overflow-y-auto flex flex-col gap-5 pr-3 custom-scrollbar">
-            {messages.map((msg) => (
+            {messages.map((msg: any) => (
               <motion.div 
                 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
                 key={msg.id} 
