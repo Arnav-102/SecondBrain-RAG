@@ -1,4 +1,4 @@
-# Second Brain v2 (RAG Pipeline) 🧠
+# Second Brain (RAG Pipeline) 🧠
 
 A full-stack, cloud-native **Retrieval-Augmented Generation (RAG)** pipeline designed to act as an intelligent knowledge assistant. This system parses documents, generates high-dimensional embeddings using ChromaDB, and performs semantic cosine-similarity search before passing context to a cloud-based LLM (Llama 3 via Groq) for rapid inference.
 
